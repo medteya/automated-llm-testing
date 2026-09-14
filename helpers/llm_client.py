@@ -9,10 +9,16 @@ from deepeval.metrics import (
 )
 from deepeval.test_case import SingleTurnParams
 
-os.environ["OPENAI_BASE_URL"] = "http://localhost:1234/v1"
-os.environ["OPENAI_API_KEY"] = "lm-studio"
+IS_CI = os.getenv("CI") == "true"
 
-MODEL_NAME = "google/gemma-4-e4b"
+if IS_CI:
+    os.environ["OPENAI_BASE_URL"] = "https://api.groq.com/openai/v1"
+    os.environ["OPENAI_API_KEY"] = os.getenv("GROQ_API_KEY")
+    MODEL_NAME = "openai/gpt-oss-20b"
+else:
+    os.environ["OPENAI_BASE_URL"] = "http://localhost:1234/v1"
+    os.environ["OPENAI_API_KEY"] = "lm-studio"
+    MODEL_NAME = "google/gemma-4-e4b"
 
 def get_relevancy_metric(threshold=0.7):
     return AnswerRelevancyMetric(
