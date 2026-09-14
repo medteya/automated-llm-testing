@@ -31,19 +31,19 @@ jobs:
         run: |
           echo "Running Accuracy Tests..."
           python -m pytest tests/test_accuracy.py
-          sleep 12
+          sleep 18
 
           echo "Running Bias Tests..."
           python -m pytest tests/test_bias.py
-          sleep 12
+          sleep 18
 
           echo "Running Hallucination Tests..."
           python -m pytest tests/test_hallucination.py
-          sleep 12
+          sleep 18
 
           echo "Running Relevancy Tests..."
           python -m pytest tests/test_relevancy.py
-          sleep 12
+          sleep 18
 
           echo "Running Toxicity Tests..."
           python -m pytest tests/test_toxicity.py
